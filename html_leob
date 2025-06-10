@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venda de Carros</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <header>
+        <h1>Concessionária de Carros</h1>
+        <nav>
+            <ul>
+                <li><a href="#carros">Carros Disponíveis</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="carros">
+        <h2>Carros Disponíveis</h2>
+        <div class="carro">
+            <img src="carro1.jpg" alt="Carro 1">
+            <h3>Modelo A</h3>
+            <p>Preço: R$ 30,000</p>
+            <p>Descrição: Carro econômico com 4 cilindros, ideal para cidade.</p>
+        </div>
+        <div class="carro">
+            <img src="carro2.jpg" alt="Carro 2">
+            <h3>Modelo B</h3>
+            <p>Preço: R$ 45,000</p>
+            <p>Descrição: SUV espaçosa, perfeita para famílias.</p>
+        </div>
+    </section>
+    
+    <section id="contato">
+        <h2>Contato</h2>
+        <form action="#" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Concessionária de Carros. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
