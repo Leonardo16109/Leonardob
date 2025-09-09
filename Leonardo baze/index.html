@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Premium - Concessionária de Carros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variáveis e Reset */
+        :root {
+            --primary: #003366;
+            --secondary: #ff6600;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #333;
+            --accent: #e6f0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #e55e00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #002244;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seção de Carros */
+        .carros-section {
+            background: var(--accent);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto 0;
+        }
+
+        .carros-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .carro-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .carro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .carro-imagem {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .carro-info {
+            padding: 20px;
+        }
+
+        .carro-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .carro-preco {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+
+        .carro-descricao {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .carro-detalhes {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .carro-detalhe {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .carro-detalhe i {
+            color: var(--primary);
+        }
+
+        .botao-detalhes {
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .botao-detalhes:hover {
+            background: var(--secondary);
+        }
+
+        /* Seção de Vantagens */
+        .vantagens {
+            background: white;
+        }
+
+        .vantagens-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .vantagem-card {
+            padding: 30px 20px;
+            border-radius: 8px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .vantagem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .vantagem-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .vantagem-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Seção de Contato */
+        .contato-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.9)),
+                url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .contato-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contato-info h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contato-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .contato-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contato-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            min-width: 30px;
+        }
+
+        .contato-text h3 {
+            margin-bottom: 5px;
+        }
+
+        .form-contato {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-contato h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            background: var(--primary);
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 15px;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.4s ease;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            .hero {
+                height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .carro-card {
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .carro-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .carro-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .carro-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .carro-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Efeitos de scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <h1>Auto Premium</h1>
+            </div>
+
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#carros">Carros</a></li>
+                    <li><a href="#vantagens">Vantagens</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <h1>Encontre o carro dos seus sonhos</h1>
+            <p>Na Auto Premium, oferecemos os melhores veículos com garantia e procedência. Financiamento facilitado e condições especiais.</p>
+            <a href="#carros" class="btn">Ver Carros</a>
+        </div>
+    </section>
+
+    <section class="carros-section" id="carros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Carros Disponíveis</h2>
+            </div>
+
+            <div class="carros-container">
+                <!-- Carro 1 -->
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Volkswagen Golf">
+                    <div class="carro-info">
+                        <h3>Volkswagen Golf 2023</h3>
+                        <p class="carro-preco">R$ 130.900</p>
+                        <p class="carro-descricao">Hatch premium com acabamento de alto padrão e tecnologia avançada.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 15.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Flex</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Automático</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <!-- Carro 2 -->
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Audi Q5">
+                    <div class="carro-info">
+                        <h3>Audi Q5 2022</h3>
+                        <p class="carro-preco">R$ 289.900</p>
+                        <p class="carro-descricao">SUV de luxo com espaço interno generoso e desempenho excepcional.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 22.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Gasolina</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Automático</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <!-- Carro 3 -->
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Fiat Argo">
+                    <div class="carro-info">
+                        <h3>Fiat Argo 2023</h3>
+                        <p class="carro-preco">R$ 75.990</p>
+                        <p class="carro-descricao">Compacto econômico com design moderno e tecnologia de ponta.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 8.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Flex</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Manual</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <!-- Carro 4 -->
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Jeep Renegade">
+                    <div class="carro-info">
+                        <h3>Jeep Renegade 2022</h3>
+                        <p class="carro-preco">R$ 118.900</p>
+                        <p class="carro-descricao">SUV robusto com tração 4x4 e espaço para toda a família.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 18.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Flex</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Automático</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Jeep Renegade">
+                    <div class="carro-info">
+                        <h3>Jeep Renegade 2022</h3>
+                        <p class="carro-preco">R$ 118.900</p>
+                        <p class="carro-descricao">SUV robusto com tração 4x4 e espaço para toda a família.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 18.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Flex</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Automático</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+                <div class="carro-card">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="carro-imagem" alt="Jeep Renegade">
+                    <div class="carro-info">
+                        <h3>Jeep Renegade 2022</h3>
+                        <p class="carro-preco">R$ 118.900</p>
+                        <p class="carro-descricao">SUV robusto com tração 4x4 e espaço para toda a família.</p>
+                        <div class="carro-detalhes">
+                            <span class="carro-detalhe"><i class="fas fa-tachometer-alt"></i> 18.000 km</span>
+                            <span class="carro-detalhe"><i class="fas fa-gas-pump"></i> Flex</span>
+                            <span class="carro-detalhe"><i class="fas fa-car"></i> Automático</span>
+                        </div>
+                        <a href="#" class="botao-detalhes">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vantagens" id="vantagens">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que escolher a Auto Premium?</h2>
+            </div>
+
+            <div class="vantagens-container">
+                <div class="vantagem-card">
+                    <div class="vantagem-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantia Total</h3>
+                    <p>Todos os nossos veículos passam por rigorosa inspeção e têm garantia de 1 ano.</p>
+                </div>
+
+                <div class="vantagem-card">
+                    <div class="vantagem-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Financiamento</h3>
+                    <p>Condições especiais com as melhores taxas do mercado e aprovação rápida.</p>
+                </div>
+
+                <div class="vantagem-card">
+                    <div class="vantagem-icon">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <h3>Seguro Incluso</h3>
+                    <p>3 meses de seguro gratuito para todos os veículos adquiridos.</p>
+                </div>
+
+                <div class="vantagem-card">
+                    <div class="vantagem-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Assistência 24h</h3>
+                    <p>Suporte completo em todo o território nacional a qualquer hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contato-section" id="contato">
+        <div class="container contato-container">
+            <div class="contato-info">
+                <h2>Entre em Contato</h2>
+
+                <div class="contato-item">
+                    <div class="contato-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contato-text">
+                        <h3>Endereço</h3>
+                        <p>Av. das Automóveis, 1234 - Centro, Cascavel - PR</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <div class="contato-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contato-text">
+                        <h3>Telefone</h3>
+                        <p>(45) 3333-4444 | (45) 99999-8888</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <div class="contato-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contato-text">
+                        <h3>Email</h3>
+                        <p>contato@autopremium.com.br</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <div class="contato-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contato-text">
+                        <h3>Horário de Funcionamento</h3>
+                        <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 14h</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-contato">
+                <h3>Fale Conosco</h3>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carro-interesse">Carro de Interesse</label>
+                        <select id="carro-interesse" name="carro-interesse">
+                            <option value="">Selecione um modelo</option>
+                            <option value="golf">Volkswagen Golf</option>
+                            <option value="audi">Audi Q5</option>
+                            <option value="argo">Fiat Argo</option>
+                            <option value="jeep">Jeep Renegade</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre a Auto Premium</h3>
+                    <p>Há mais de 15 anos no mercado, oferecemos os melhores veículos com garantia e procedência. Nossa missão é proporcionar a melhor experiência na compra do seu carro.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#carros">Carros Disponíveis</a></li>
+                        <li><a href="#vantagens">Nossas Vantagens</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="#">Financiamento</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Horário de Atendimento</h3>
+                    <p>Segunda a Sexta: 9h às 18h</p>
+                    <p>Sábado: 9h às 14h</p>
+                    <p>Domingo: Fechado</p>
+                    <p>Feriados: Consultar horário especial</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Inscreva-se para receber novidades e promoções exclusivas.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Seu email" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Inscrever</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Auto Premium - Concessionária de Carros. Todos os direitos reservados.</p>
+                <p>CNPJ: 12.345.678/0001-00 | As imagens são meramente ilustrativas</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="cadastrocliente.html"><i class="fas fa-user-plus"></i> Cadastro Cliente</a></li>
+                <li><a href="cadastroprodutos.html"><i class="fas fa-box-open"></i> Cadastro Produtos</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Validação do formulário
+        const contactForm = document.querySelector('.form-contato form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validação básica
+                const nome = document.getElementById('nome').value;
+                const email = document.getElementById('email').value;
+                const telefone = document.getElementById('telefone').value;
+
+                if (nome && email && telefone) {
+                    // Simular envio
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    this.reset();
+                } else {
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                }
+            });
+        }
+
+        // Animação ao rolar para as seções
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

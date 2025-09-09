@@ -1,0 +1,72 @@
+body {
+    background: linear-gradient(to right, #0a0a1a, #1a1a2e);
+    color: #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.cadastro-produto {
+    background: rgba(30, 30, 46, 0.95);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    max-width: 550px;
+    width: 100%;
+    border: 1px solid rgba(0, 170, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2);
+}
+
+.cadastro-produto h2 {
+    text-align: center;
+    color: #00aaff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1.5rem;
+}
+
+.cadastro-produto form {
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro-produto label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cadastro-produto input,
+.cadastro-produto textarea {
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    color: white;
+    font-size: 1rem;
+}
+
+.cadastro-produto input:focus,
+.cadastro-produto textarea:focus {
+    outline: none;
+    border-color: #00aaff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.cadastro-produto button {
+    background: #00aaff;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+
+.cadastro-produto button:hover {
+    background: #0077cc;
+    transform: translateY(-3px);
+}
